@@ -19,7 +19,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    // return view('dashboard');
+    if(Auth::user()->hasRole('administrator')){
+        return 'Customize your Admin route';
+    }else{
+        return 'Customize your User route';
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
